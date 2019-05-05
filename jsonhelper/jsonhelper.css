@@ -1,0 +1,68 @@
+.editor-description {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.editor-container {
+    background: transparent;
+    display: flex;
+}
+
+#input-area {
+    margin-left: 215px;
+    margin-top: 55px;
+    resize: none;
+    height: 600px;
+    width: 750px;
+    font-size: 18px;
+    border: solid 1px gray;
+}
+
+#output-area {
+    margin-left: 3px;
+    margin-top: 55px;
+    resize: none;
+    font-size: 18px;
+    height: 600px;
+    max-height: 600px;
+    width: 750px;
+    max-width: 750px;
+    left: 965px;
+    background-color: white;
+    display: block;
+    border: solid 1px gray;
+}
+
+.output-pre {
+    margin-left: 15px;
+}
+
+.usage-container {
+    margin-top: 55px;
+    margin-left: 150px;
+}
+
+.span-hl {
+    background-color: white;
+    border: solid 1px black;
+    padding: 1px;
+}
+
+.copy-button {
+    position: absolute;
+    left: 1000px;
+    top: 730px;
+}
+
+.invis-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+}

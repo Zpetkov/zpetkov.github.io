@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="jsonhelper.css">
+    <title>JSON object helper</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <h1 class="page-header-text">ZPETKOV</h1>
+    </div>
+    <div id="main-container">
+        <div class="editor-description">JSON object generator from text for Java</div>
+        <div class="editor-container">
+            <div class="input-container">
+                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()"></textarea>
+            </div>
+            <div id="output-area">
+                <div id="output"></div>
+            </div>
+            <input type="button" class="copy-button" value="Copy to clipboard" onclick="copyToClipboard()">
+        </div>
+        <div class="usage-container">
+            <h2>Information:</h2>
+            <div class="usage-line">
+                <pre>The last token of each line is taken as a <span class="span-hl">JSON</span> property name.</pre>
+            </div>
+            <div class="usage-line">
+                <pre>If last token is a parseable number the previous token is selected and generated as the number.
+                <span class="span-hl">someNumber 123</span>            { "someNumber": 123 }
+                </pre>
+            </div>
+            <div class="usage-line">
+                <pre>Copy pasting field information from Java classes provides a hint about property type.
+
+            <span class="span-hl">private final String name;</span>
+            <span class="span-hl">private final Long id;</span>
+            <span class="span-hl">private final Date registerDate;</span>
+
+            Should produce:
+
+            {
+                "name": "string",
+                "id": 100000,
+                "registerDate": "2019-05-05T18:04:04.334Z"
+            }
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="jsonhelper.js"></script>
+</body>
+
+</html>
