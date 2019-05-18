@@ -20,11 +20,13 @@
         <div class="editor-description">JSON object generator from text for Java</div>
         <div class="editor-container">
             <div class="input-container">
-                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()"></textarea>
+                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
             </div>
             <div id="output-area">
                 <div id="output"></div>
             </div>
+        </div>
+        <div>
             <input type="button" class="copy-button" value="Copy to clipboard" onclick="copyToClipboard()">
         </div>
         <div class="usage-container">
@@ -52,6 +54,9 @@
                 "registerDate": "2019-05-05T18:04:04.334Z"
             }
                 </pre>
+            </div>
+            <div class="usage-line">
+                <pre>Java annotations are ignored</pre>
             </div>
         </div>
     </div>

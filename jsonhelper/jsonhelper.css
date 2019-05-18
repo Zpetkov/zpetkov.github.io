@@ -9,11 +9,15 @@
     display: flex;
 }
 
+.input-container {
+    display: flex;
+}
+
 #input-area {
     margin-left: 215px;
     margin-top: 55px;
     resize: none;
-    height: 600px;
+    height: auto;
     width: 750px;
     font-size: 18px;
     border: solid 1px gray;
@@ -24,8 +28,7 @@
     margin-top: 55px;
     resize: none;
     font-size: 18px;
-    height: 600px;
-    max-height: 600px;
+    min-height: 600px;
     width: 750px;
     max-width: 750px;
     left: 965px;
@@ -50,9 +53,9 @@
 }
 
 .copy-button {
-    position: absolute;
-    left: 1000px;
-    top: 730px;
+    margin-top: 2px;
+    position: relative;
+    left: 985px;
 }
 
 .invis-area {

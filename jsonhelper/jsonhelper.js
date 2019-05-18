@@ -1,4 +1,5 @@
 const javaTypes = {
+    boolean: true,
     string: "string",
     str: "string",
     char: 'c',
@@ -6,13 +7,19 @@ const javaTypes = {
     int: 100,
     integer: 100,
     short: 100,
-    boolean: true,
+    bigdecimal: 1000000,
     double: 100.30,
     float: 100.30,
     date: new Date(),
     timestamp: new Date(),
     offsetdatetime: new Date(),
 };
+
+const commentRegex = new RegExp("(\\s*//.*)$");
+const semicolonsRegex = new RegExp(";", "g");
+const removePatterns = [commentRegex, semicolonsRegex];
+
+const whitespaces = new RegExp("\\s+");
 
 function inputPressed() {
     var inputArea = document.getElementById("input-area");
@@ -21,15 +28,26 @@ function inputPressed() {
     var lines = text.split("\n");
     var keys = {};
     lines.forEach(line => {
-        var tokens = line.trim().split(new RegExp("\\s+"));
+        line = line.trim();
+        if (line.startsWith("@")) {
+            return;
+        }
+        removePatterns.forEach(function (r) {
+            line = line.replace(r, "");
+        });
+
+        line = line.trim();
+
+        var tokens = line.split(whitespaces);
         var first = tokens[tokens.length - 1];
-        first = first.replace(";", "");
         var value;
         if (isNaN(first)) {
             value = determineType(tokens);
-        } else {
+        } else if (tokens.length >= 2) {
             value = parseInt(first);
-            first = tokens[Math.max(tokens.length - 2, 0)];
+            first = tokens[tokens.length - 2];
+        } else {
+            value = {};
         }
 
         if (first.length > 0 && typeof keys[first] === "undefined") {
@@ -37,10 +55,14 @@ function inputPressed() {
         }
     });
 
-    var jsonStringified = JSON.stringify(keys, null, 3);
+    var jsonStringified;
+    if (Object.keys(keys).length > 0) {
+        jsonStringified = JSON.stringify(keys, null, 3);
+    } else {
+        jsonStringified = "";
+    }
 
     document.getElementById("output").innerHTML = "<pre class=\"output-pre\">" + jsonStringified + "</pre>";
-
 }
 
 function determineType(tokens) {
@@ -72,4 +94,8 @@ function copyToClipboard() {
     }
 
     document.body.removeChild(bufferArea);
+}
+
+function inputPasted() {
+    setTimeout(inputPressed, 100);
 }

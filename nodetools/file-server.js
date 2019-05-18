@@ -50,3 +50,5 @@ http.createServer(function (request, response) {
 }).listen(parseInt(port));
 
 console.log(`Server listening on port ${port}`);
+const home = "http://localhost:" + port + "/index.html";
+console.log(home);
