@@ -2,7 +2,7 @@ const javaTypes = {
     boolean: true,
     string: "string",
     str: "string",
-    char: 'c',
+    char: "c",
     long: 100000,
     int: 100,
     integer: 100,
@@ -20,7 +20,7 @@ const sampleValues = {};
 
 Object.keys(javaTypes).forEach(t => {
     sampleValues[t] = javaTypes[t];
-    var listValue = [javaTypes[t]]
+    var listValue = [javaTypes[t]];
     sampleValues[t + "[]"] = listValue;
     collectionTypes.forEach(collectionType => {
         sampleValues[collectionType + "<" + t + ">"] = listValue;
@@ -78,17 +78,14 @@ function inputPressed() {
 }
 
 function determineValue(tokens) {
-    var result = {};
-
     for (var i = 0; i < tokens.length - 1; i++) {
         var token = tokens[i];
         var value = sampleValues[token.toLowerCase()];
         if (value) {
-            result = value;
-            break;
+            return value;
         }
     }
-    return result;
+    return {};
 }
 
 function copyToClipboard() {
