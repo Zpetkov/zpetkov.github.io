@@ -15,6 +15,18 @@ const javaTypes = {
     offsetdatetime: new Date(),
 };
 
+const collectionTypes = ["collection", "list", "arraylist", "linkedlist", "set", "hashset", "treeset", "linkedhashset"];
+const sampleValues = {};
+
+Object.keys(javaTypes).forEach(t => {
+    sampleValues[t] = javaTypes[t];
+    var listValue = [javaTypes[t]]
+    sampleValues[t + "[]"] = listValue;
+    collectionTypes.forEach(collectionType => {
+        sampleValues[collectionType + "<" + t + ">"] = listValue;
+    });
+});
+
 const commentRegex = new RegExp("(\\s*//.*)$");
 const semicolonsRegex = new RegExp(";", "g");
 const removePatterns = [commentRegex, semicolonsRegex];
@@ -42,7 +54,7 @@ function inputPressed() {
         var first = tokens[tokens.length - 1];
         var value;
         if (isNaN(first)) {
-            value = determineType(tokens);
+            value = determineValue(tokens);
         } else if (tokens.length >= 2) {
             value = parseInt(first);
             first = tokens[tokens.length - 2];
@@ -65,13 +77,14 @@ function inputPressed() {
     document.getElementById("output").innerHTML = "<pre class=\"output-pre\">" + jsonStringified + "</pre>";
 }
 
-function determineType(tokens) {
+function determineValue(tokens) {
     var result = {};
+
     for (var i = 0; i < tokens.length - 1; i++) {
         var token = tokens[i];
-        var returnType = javaTypes[token.toLowerCase()];
-        if (returnType) {
-            result = returnType;
+        var value = sampleValues[token.toLowerCase()];
+        if (value) {
+            result = value;
             break;
         }
     }
