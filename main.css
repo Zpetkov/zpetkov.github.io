@@ -28,13 +28,17 @@ body {
 
 .navigation {
     margin-top: 150px;
-    margin-left: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .navigation-link {
     max-width: 400px;
     border: solid 2px black;
     margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .index-description {

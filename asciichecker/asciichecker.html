@@ -8,7 +8,8 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/bootstrap.min.css">
     <link rel="stylesheet" href="/main.css">
-    <title>JSON object helper</title>
+    <link rel="stylesheet" href="asciichecker.css">
+    <title>ASCII Checker</title>
 </head>
 
 <body class="colored-bg">
@@ -16,18 +17,20 @@
         <h1 class="page-header-text">ZPETKOV</h1>
     </div>
     <div id="main-container">
-        <div class="index-description">
-            Tools and utilities
-            <div class="navigation">
-                <div class="navigation-link">
-                    <a href="/jsonhelper/jsonhelper.html">JSON object helper</a>
-                </div>
-                <div class="navigation-link">
-                    <a href="/asciichecker/asciichecker.html">ASCII Checker</a>
-                </div>
+        <div class="editor-description">ASCII Character codes checker</div>
+        <div class="input-container">
+            <div>
+                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
+            </div>
+        </div>
+        <div id="output-area">
+            <div>
+                <div id="output"></div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="asciichecker.js"></script>
 </body>
 
 </html>
