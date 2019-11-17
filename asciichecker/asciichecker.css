@@ -48,7 +48,7 @@
     margin-left: 13px;
 }
 
-.asci-span {
+.ascii-span {
     width: 26px;
     height: 35px;
     line-height: 35px;
@@ -56,11 +56,11 @@
     text-align: center;
     margin: 2px 2px 2px 1px;
     display: inline-block;
-    background-color: rgb(80, 230, 40);
+    background-color: rgb(119, 220, 93);
     border-radius: 4px;
 }
 
-.non-asci-span {
+.non-ascii-span {
     width: 26px;
     height: 35px;
     line-height: 35px;
@@ -68,10 +68,40 @@
     text-align: center;
     margin: 2px 2px 2px 1px;
     display: inline-block;
-    background-color: rgb(214, 47, 18);
+    background-color: rgb(241, 124, 104);
     border-radius: 4px;
 }
 
 .invisible-char {
     visibility: hidden;
+}
+
+#next-occurrence {
+    user-select: none;
+    cursor: pointer;
+    position: fixed;
+    top: 50%;
+    right: 23%;
+    background: rgb(241, 124, 104);
+    height: 35px;
+    line-height: 35px;
+    display: none;
+    border: solid 1.3px black;
+}
+
+.highlighted-span-begin {
+    border-left: solid 3px black;
+    border-bottom: solid 3px black;
+    border-top: solid 3px black;
+}
+
+.highlighted-span {
+    border-bottom: solid 3px black;
+    border-top: solid 3px black;
+}
+
+.highlighted-span-end {
+    border-bottom: solid 3px black;
+    border-top: solid 3px black;
+    border-right: solid 3px black;
 }

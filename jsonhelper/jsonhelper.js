@@ -20,7 +20,7 @@ const sampleValues = {};
 
 Object.keys(javaTypes).forEach(t => {
     sampleValues[t] = javaTypes[t];
-    var listValue = [javaTypes[t]];
+    const listValue = [javaTypes[t]];
     sampleValues[t + "[]"] = listValue;
     collectionTypes.forEach(collectionType => {
         sampleValues[collectionType + "<" + t + ">"] = listValue;
@@ -34,11 +34,11 @@ const removePatterns = [commentRegex, semicolonsRegex];
 const whitespaces = new RegExp("\\s+");
 
 function inputPressed() {
-    var inputArea = document.getElementById("input-area");
-    var text = inputArea.value;
+    const inputArea = document.getElementById("input-area");
+    const text = inputArea.value;
 
-    var lines = text.split("\n");
-    var keys = {};
+    const lines = text.split("\n");
+    const keys = {};
     lines.forEach(line => {
         line = line.trim();
         if (line.startsWith("@")) {
@@ -50,9 +50,9 @@ function inputPressed() {
 
         line = line.trim();
 
-        var tokens = line.split(whitespaces);
-        var first = tokens[tokens.length - 1];
-        var value;
+        const tokens = line.split(whitespaces);
+        let first = tokens[tokens.length - 1];
+        let value;
         if (isNaN(first)) {
             value = determineValue(tokens);
         } else if (tokens.length >= 2) {
@@ -67,7 +67,7 @@ function inputPressed() {
         }
     });
 
-    var jsonStringified;
+    let jsonStringified;
     if (Object.keys(keys).length > 0) {
         jsonStringified = JSON.stringify(keys, null, 3);
     } else {
@@ -78,9 +78,9 @@ function inputPressed() {
 }
 
 function determineValue(tokens) {
-    for (var i = 0; i < tokens.length - 1; i++) {
-        var token = tokens[i];
-        var value = sampleValues[token.toLowerCase()];
+    for (let i = 0; i < tokens.length - 1; i++) {
+        const token = tokens[i];
+        const value = sampleValues[token.toLowerCase()];
         if (value) {
             return value;
         }
@@ -89,8 +89,8 @@ function determineValue(tokens) {
 }
 
 function copyToClipboard() {
-    var text = document.getElementById("output").firstChild.textContent;
-    var bufferArea = document.createElement("textarea");
+    const text = document.getElementById("output").firstChild.textContent;
+    const bufferArea = document.createElement("textarea");
     bufferArea.classList.add("invis-area");
     bufferArea.value = text;
     document.body.appendChild(bufferArea);
@@ -109,3 +109,5 @@ function copyToClipboard() {
 function inputPasted() {
     setTimeout(inputPressed, 100);
 }
+
+window.onload = () => { document.getElementById("input-area").select() };
