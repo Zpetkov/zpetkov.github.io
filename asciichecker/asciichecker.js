@@ -8,6 +8,13 @@ function empty(node) {
     }
 }
 
+function removeNode(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.parentNode.removeChild(element);
+    }
+}
+
 function spanId(index) {
     return "s_" + index;
 }
@@ -106,10 +113,32 @@ function findNextOccurrence() {
 }
 
 function inputPressed() {
+    const maxTextChunkLength = 10000;
     const inputArea = document.getElementById("input-area");
-    const text = inputArea.value;
     const outputArea = document.getElementById("output-area");
     empty(outputArea);
+
+    const text = inputArea.value;
+    if (text.length > maxTextChunkLength) {
+        let chunkCount = 0;
+        for (let i = 0; i < text.length / maxTextChunkLength; i++) {
+            outputArea.appendChild(createTextChunk(text, i, maxTextChunkLength));
+            chunkCount++;
+        }
+
+        document.getElementById("chunk-count").setAttribute("data-chunks", chunkCount);
+        document.getElementById("chunked").style.display = "block";
+
+        renderChunk(0);
+    } else {
+
+        document.getElementById("chunked").style.display = "none";
+        renderText(text);
+    }
+}
+
+function renderText(text) {
+    removeNode("output");
 
     const outputElement = document.createElement("div");
     outputElement.id = "output";
@@ -122,9 +151,39 @@ function inputPressed() {
         outputElement.appendChild(span);
     }
 
-    outputArea.appendChild(outputElement);
-
+    document.getElementById("output-area").appendChild(outputElement);
     document.getElementById("next-occurrence").style.display = showNextOccurrence ? "block" : "none";
+}
+
+function createTextChunk(text, index, length) {
+    const chunk = document.createElement("input");
+    chunk.type = "hidden";
+    chunk.id = "text-chunk-" + index;
+    chunk.setAttribute("data-index", index);
+    chunk.value = text.substring(length * index, length * (index + 1));
+    return chunk;
+}
+
+function renderChunk(index) {
+    const chunk = document.getElementById("text-chunk-" + index);
+    if (chunk) {
+        renderText(chunk.value);
+
+        document.getElementById("output").setAttribute("data-chunk", chunk.getAttribute("data-index"));
+        const chunkCount = document.getElementById("chunk-count");
+        chunkCount.innerHTML = "<span>&nbsp;</span>" + (index + 1) + " / " + chunkCount.getAttribute("data-chunks") + "<span>&nbsp;</span>";
+
+    }
+}
+
+function renderNextChunk() {
+    const index = Number(document.getElementById("output").getAttribute("data-chunk"));
+    renderChunk(index + 1);
+}
+
+function renderPreviousChunk() {
+    const index = Number(document.getElementById("output").getAttribute("data-chunk"));
+    renderChunk(index - 1);
 }
 
 function inputPasted() {

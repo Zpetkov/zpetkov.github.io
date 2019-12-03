@@ -105,3 +105,47 @@
     border-top: solid 3px black;
     border-right: solid 3px black;
 }
+
+#chunked {
+    text-align: center;
+    display: none;
+    margin-bottom: -6px;
+}
+
+.arrow-right {
+    background-image: url('arrow.png');
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.arrow-left {
+    background-image: url('arrow.png');
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+#chunk-count {
+    min-width: 15px;
+    line-height: 30px;
+    height: 30px;
+    background-color: white;
+    border: solid 1px black;
+    font-size: 16px;
+    user-select: none;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.chunks-indicator {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}

@@ -21,6 +21,15 @@
         <div class="input-container">
             <div>
                 <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
+                <div id="chunked">Text is too large and has been split in chunks of 10000.
+                    <div>
+                        <div class="chunks-indicator">
+                            <label class="arrow-left" onclick="renderPreviousChunk()"></label>
+                            <span id="chunk-count"></span>
+                            <label class="arrow-right" onclick="renderNextChunk()"></label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="output-area">
