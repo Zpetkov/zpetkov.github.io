@@ -180,7 +180,7 @@ function guessParse(input) {
             typeCandidates[i].push("meridian");
         } else if (timeZones[token.toUpperCase()]) {
             typeCandidates[i].push("timezone");
-        } else if (token.length > 4 && hourMinuteRegex.test(token)) {
+        } else if (token.length >= 4 && hourMinuteRegex.test(token)) {
             typeCandidates[i].push("hourMinute");
         } else {
             typeCandidates.unidentifiableCount++;

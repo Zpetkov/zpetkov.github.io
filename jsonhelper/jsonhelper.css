@@ -5,36 +5,31 @@
 }
 
 .editor-container {
+    margin-top: 10px;
     background: transparent;
     display: flex;
-}
-
-.input-container {
-    display: flex;
+    text-align: center;
 }
 
 #input-area {
-    margin-left: 215px;
-    margin-top: 55px;
+    margin-left: 10%;
+    margin-right: 3px;
     resize: none;
     height: auto;
-    width: 750px;
     font-size: 18px;
     border: solid 1px gray;
+    width: 39.5%;
 }
 
-#output-area {
-    margin-left: 3px;
-    margin-top: 55px;
+#output {
     resize: none;
     font-size: 18px;
     min-height: 600px;
-    width: 750px;
-    max-width: 750px;
-    left: 965px;
+    width: 39.5%;
     background-color: white;
     display: block;
     border: solid 1px gray;
+    text-align: left;
 }
 
 .output-pre {
@@ -43,7 +38,7 @@
 
 .usage-container {
     margin-top: 55px;
-    margin-left: 150px;
+    margin-left: 5%;
 }
 
 .span-hl {
@@ -55,7 +50,7 @@
 .copy-button {
     margin-top: 2px;
     position: relative;
-    left: 985px;
+    left: 50%;
 }
 
 .invis-area {
@@ -68,4 +63,16 @@
     border: none;
     outline: none;
     background: transparent;
+}
+
+@media only screen and (max-width: 1550px) {
+    #output {
+        min-height: 400px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #output {
+        min-height: 300px;
+    }
 }
