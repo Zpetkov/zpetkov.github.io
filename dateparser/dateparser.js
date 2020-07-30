@@ -97,9 +97,16 @@ const timeZones = {
     PST: "-0800",
 }
 
-const tokenRegex = new RegExp("([a-zA-Z0-9:]+)", 'g');
-const meridians = { am: 1, pm: 1 };
-const hourMinuteRegex = new RegExp("^\\d{1,2}:\\d{1,2}(:\\d{1,2})?(am|pm|AM|PM)?$");
+const shortTimeZones = {
+    PT: { nonDst: 'PST', dst: 'PDT' },
+    ET: { nonDst: 'EST', dst: 'EDT' }
+}
+
+const tokenRegex = new RegExp("([a-zA-Z0-9:\\.]+)", 'g');
+const meridians = { am: 'am', pm: 'pm' };
+meridians["p.m."] = 'pm';
+meridians["a.m."] = 'am';
+const hourMinuteRegex = new RegExp("^\\d{1,2}:\\d{1,2}(:\\d{1,2})?([aApP]\\.?[mM]\\.?)?$");
 
 function extractHourTime(str) {
     const parts = str.split(":");
@@ -113,11 +120,13 @@ function extractHourTime(str) {
         }
     }
 
-    if (str.includes("pm")) {
-        extracted.meridian = 'pm';
-    } else if (str.includes("am")) {
-        extracted.meridian = 'am';
-    } else if (extracted.hour > 12) {
+    Object.keys(meridians).forEach(k => {
+        if (str.includes(k)) {
+            extracted.meridian = meridians[k];
+        }
+    });
+
+    if (extracted.hour > 12) {
         extracted.meridian = extracted.hour > 12 ? 'pm' : 'am';
         extracted.hour = extracted.hour > 12 ? (extracted.hour - 12) : extracted.hour;
     }
@@ -180,6 +189,8 @@ function guessParse(input) {
             typeCandidates[i].push("meridian");
         } else if (timeZones[token.toUpperCase()]) {
             typeCandidates[i].push("timezone");
+        } else if (shortTimeZones[token.toUpperCase()]) {
+            typeCandidates[i].push("shortTimezone");
         } else if (token.length >= 4 && hourMinuteRegex.test(token)) {
             typeCandidates[i].push("hourMinute");
         } else {
@@ -194,6 +205,7 @@ function guessParse(input) {
     let extractedHour = null;
     let hourCandidate = null;
     let timezoneCandidate = null;
+    let shortTimezone = null;
     for (let i = 0; i < tokens.length; i++) {
         const candidates = typeCandidates[i];
         if (candidates.indexOf("month") > -1) {
@@ -223,6 +235,8 @@ function guessParse(input) {
                 timezoneCandidate = timeZones[tokens[i].toUpperCase()];
                 extracted.push({ name: "timezone", value: tokens[i] });
             }
+        } else if (candidates.indexOf("shortTimezone") > -1) {
+            shortTimezone = shortTimeZones[tokens[i].toUpperCase()];
         }
     }
 
@@ -249,6 +263,16 @@ function guessParse(input) {
     }
     hours = extractedHour ? formatExtractedTime(extractedHour) : "00:00:00.000";
     let format = "DD-MM-YYYY hh:mm:ss:sss a";
+
+    if (shortTimezone) {
+        const isDst = moment(day + "-" + month + "-" + year + " " + hours + " " + meridian, format).isDST();
+        const resolvedTimezone = isDst ? shortTimezone.dst : shortTimezone.nonDst;
+        if (!timezoneCandidate) {
+            timezoneCandidate = timeZones[resolvedTimezone];
+            extracted.push({ name: "timezone", value: resolvedTimezone });
+        }
+    }
+
     if (timezoneCandidate) {
         format = format + " Z";
     } else {
