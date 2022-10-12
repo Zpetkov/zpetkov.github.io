@@ -193,6 +193,8 @@ function guessParse(input) {
             typeCandidates[i].push("shortTimezone");
         } else if (token.length >= 4 && hourMinuteRegex.test(token)) {
             typeCandidates[i].push("hourMinute");
+        } else if (token.length >= 9 && isOnlyDigits(token)) {
+            typeCandidates[i].push("epochTimestamp");
         } else {
             typeCandidates.unidentifiableCount++;
         }
@@ -206,6 +208,7 @@ function guessParse(input) {
     let hourCandidate = null;
     let timezoneCandidate = null;
     let shortTimezone = null;
+    let epochDate = null;
     for (let i = 0; i < tokens.length; i++) {
         const candidates = typeCandidates[i];
         if (candidates.indexOf("month") > -1) {
@@ -237,6 +240,8 @@ function guessParse(input) {
             }
         } else if (candidates.indexOf("shortTimezone") > -1) {
             shortTimezone = shortTimeZones[tokens[i].toUpperCase()];
+        } else if (epochDate == null && candidates.indexOf("epochTimestamp") > -1){
+            epochDate = new Date(Number(tokens[i]));
         }
     }
 
@@ -244,6 +249,13 @@ function guessParse(input) {
         && tokens[hourCandidate].length <= 2 && isOnlyDigits(tokens[hourCandidate])) {
         extractedHour = { hour: pad(tokens[hourCandidate], 2), minute: "00", second: "00", millisecond: "000" };
         extracted.push({ name: "time", value: tokens[hourCandidate] });
+    }
+
+    if (epochDate != null && day == null && month == null && year == null) {
+        return {
+            date: epochDate,
+            extractedFields: [{ name: 'Assuming epoch milliseconds', value: epochDate.getTime() }]
+        }
     }
 
     if (extractedHour != null && day == null && month == null && year == null) {
@@ -392,6 +404,7 @@ function inputPressed() {
             outputRows.push({ name: "Time from now", value: relative + " " + relativeText });
 
             outputRows.push({ name: "ISO format", value: result.date.toISOString() });
+            outputRows.push({ name: "Epoch milliseconds", value: time });
             const epoch = Math.round(time / 1000);
             outputRows.push({ name: "Epoch seconds", value: epoch });
             if (result.extractedFields && result.extractedFields.length) {

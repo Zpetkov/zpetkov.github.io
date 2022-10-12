@@ -29,7 +29,8 @@ Object.keys(javaTypes).forEach(t => {
 
 const commentRegex = new RegExp("(\\s*//.*)$");
 const semicolonsRegex = new RegExp(";", "g");
-const removePatterns = [commentRegex, semicolonsRegex];
+const assignment = new RegExp("(=.*)$");
+const removePatterns = [commentRegex, semicolonsRegex, assignment];
 
 const whitespaces = new RegExp("\\s+");
 
@@ -52,16 +53,8 @@ function inputPressed() {
 
         const tokens = line.split(whitespaces);
         let first = tokens[tokens.length - 1];
-        let value;
-        if (isNaN(first)) {
-            value = determineValue(tokens);
-        } else if (tokens.length >= 2) {
-            value = parseInt(first);
-            first = tokens[tokens.length - 2];
-        } else {
-            value = {};
-        }
-
+        let value = determineValue(tokens);
+ 
         if (first.length > 0 && typeof keys[first] === "undefined") {
             keys[first] = value;
         }

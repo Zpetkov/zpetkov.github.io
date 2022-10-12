@@ -81,7 +81,7 @@
     cursor: pointer;
     position: fixed;
     top: 50%;
-    right: 23%;
+    right: 15%;
     background: rgb(241, 124, 104);
     height: 35px;
     line-height: 35px;
@@ -148,4 +148,24 @@
     margin-top: 5px;
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 1250px) {
+    #next-occurrence {
+        height: 35px;
+        line-height: 35px;
+        right: 10%;
+        width: unset;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #next-occurrence {
+        right: 0%;
+        height: unset;
+        line-height: unset;
+        width: 20%;
+        font-size: 11px;
+    }
 }
