@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="jwt.css">
+    <title>JWT Decryptor</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <a href="/index.html" class="header-link">Home</a>
+    </div>
+    <div id="main-container">
+        <div class="editor-description">JWT Decryptor</div>
+        <div class="editor-container">
+            <div id="input-div">
+                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPressed()"></textarea>
+            </div>
+            <div id="output" class="disabled">
+                <pre id="output-pre"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="jwt.js"></script>
+</body>
+
+</html>

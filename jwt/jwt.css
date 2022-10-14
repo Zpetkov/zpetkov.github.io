@@ -1,0 +1,81 @@
+.editor-description {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 25px;
+}
+
+#main-container {
+    height: 90%;
+}
+
+.editor-container {
+    height: 45%;
+    background: transparent;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#input-div {
+    width: 20%;
+    height: 80%;
+    text-align: unset;
+}
+
+#input-area {
+    resize: none;
+    height: auto;
+    font-size: 18px;
+    border: solid 1px gray;
+    width: 100%;
+    text-align: left;
+    min-height: 100%;
+}
+
+#output {
+    height: 80%;
+    resize: none;
+    font-size: 18px;
+    min-width: 20%;
+    background-color: white;
+    display: block;
+    border: solid 1px gray;
+    text-align: left;
+    margin-left: 5%;
+    overflow: scroll;
+    max-width: 20%;
+}
+
+#output-pre {
+    margin-left: 15px;
+}
+
+body {
+    height: 100%;
+}
+
+.disabled {
+    opacity: 39%;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .editor-container {
+        margin-top: 2%;
+        flex-direction: column;
+        height: 85%;
+    }
+
+    #input-div {
+        min-width: 50%;
+    }
+
+    #output{
+        margin-top: 5%;
+        min-width: 50%;
+        max-width: 92%;
+        margin-left: unset;
+    }
+}
