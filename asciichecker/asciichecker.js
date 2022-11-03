@@ -3,8 +3,8 @@ function isAscii(string) {
 }
 
 function empty(node) {
-    while (node.firstChild) {
-        node.removeChild(node.firstChild);
+    if (node) {
+        node.innerHTML = "";
     }
 }
 
@@ -29,12 +29,12 @@ function createSpan(char, index) {
     span.id = spanId(index);
     span.setAttribute("data-index", index);
     if (char.indexOf("\n") == -1 && char.indexOf(" ") == -1) {
-        span.innerHTML = char;
+        span.textContent = char;
         span.title = char.charCodeAt(0) + " [" + char + "]";
 
     } else {
         const innerSpan = document.createElement("span");
-        innerSpan.innerHTML = '@';
+        innerSpan.textContent = "@";
         innerSpan.classList.add("invisible-char");
 
         span.appendChild(innerSpan);

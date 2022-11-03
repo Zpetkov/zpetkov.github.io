@@ -102,6 +102,8 @@ const shortTimeZones = {
     ET: { nonDst: 'EST', dst: 'EDT' }
 }
 
+const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
 const tokenRegex = new RegExp("([a-zA-Z0-9:\\.]+)", 'g');
 const meridians = { am: 'am', pm: 'pm' };
 meridians["p.m."] = 'pm';
@@ -138,7 +140,7 @@ function extractHourTime(str) {
 }
 
 function pad(num, digits) {
-    let result = num;
+    let result = String(num);
     while (result.length < digits) {
         result = "0" + result;
     }
@@ -240,7 +242,7 @@ function guessParse(input) {
             }
         } else if (candidates.indexOf("shortTimezone") > -1) {
             shortTimezone = shortTimeZones[tokens[i].toUpperCase()];
-        } else if (epochDate == null && candidates.indexOf("epochTimestamp") > -1){
+        } else if (epochDate == null && candidates.indexOf("epochTimestamp") > -1) {
             epochDate = new Date(Number(tokens[i]));
         }
     }
@@ -254,7 +256,8 @@ function guessParse(input) {
     if (epochDate != null && day == null && month == null && year == null) {
         return {
             date: epochDate,
-            extractedFields: [{ name: 'Assuming epoch milliseconds', value: epochDate.getTime() }]
+            extractedFields: [{ name: 'Assuming epoch milliseconds', value: epochDate.getTime() }],
+            calendarDrawable: calendarDrawable(epochDate)
         }
     }
 
@@ -290,9 +293,11 @@ function guessParse(input) {
     } else {
         timezoneCandidate = "";
     }
+    const normalizedDate = moment(day + "-" + month + "-" + year + " " + hours + " " + meridian + " " + timezoneCandidate, format).toDate();
     return {
-        date: moment(day + "-" + month + "-" + year + " " + hours + " " + meridian + " " + timezoneCandidate, format).toDate(),
-        extractedFields: extracted
+        date: normalizedDate,
+        extractedFields: extracted,
+        calendarDrawable: calendarDrawable(normalizedDate)
     };
 }
 
@@ -316,7 +321,7 @@ function createOutput(result, hints) {
         row.classList.add("output-row");
 
         const span = document.createElement("span");
-        span.innerText = result[i].value;
+        span.innerHTML = result[i].value;
         span.title = result[i].name;
         row.appendChild(span);
 
@@ -341,8 +346,8 @@ function createOutput(result, hints) {
 }
 
 function empty(node) {
-    while (node.firstChild) {
-        node.removeChild(node.firstChild);
+    if (node) {
+        node.innerHTML = "";
     }
 }
 
@@ -357,13 +362,16 @@ const displayUnits = [
 function inputPressed() {
     const input = document.getElementById("date-input").value;
     const outputDiv = document.getElementById("output-div");
+    const outputCalendar = document.getElementById("calendar-div");
     let parsedResults = null;
     if (input && input.length) {
         parsedResults = parseTextDate(input);
     } else {
+        empty(outputCalendar);
         empty(outputDiv);
         return;
     }
+    let shouldDrawCalendar = false;
     if (parsedResults.length) {
         const result = parsedResults[0];
         const outputRows = [];
@@ -407,6 +415,11 @@ function inputPressed() {
             outputRows.push({ name: "Epoch milliseconds", value: time });
             const epoch = Math.round(time / 1000);
             outputRows.push({ name: "Epoch seconds", value: epoch });
+
+            if (result.calendarDrawable) {
+                shouldDrawCalendar = () => { drawCalendar(time); };
+            }
+
             if (result.extractedFields && result.extractedFields.length) {
                 for (let j = 0; j < result.extractedFields.length; j++) {
                     hints.push(result.extractedFields[j]);
@@ -415,9 +428,99 @@ function inputPressed() {
         }
 
         const output = createOutput(outputRows, hints);
+        empty(outputCalendar);
         empty(outputDiv);
         outputDiv.appendChild(output);
+
+        if (shouldDrawCalendar) {
+            shouldDrawCalendar();
+        }
     }
+}
+
+function calendarDrawable(date) {
+    return new Date().getFullYear() === date.getFullYear();
+}
+
+function drawCalendar(ts) {
+    const date = new Date(ts);
+    const now = new Date();
+    const startMonth = Math.min(date.getMonth(), now.getMonth());
+    const endMonth = Math.max(date.getMonth(), now.getMonth());
+
+    const calendarDiv = document.getElementById("calendar-div");
+    empty(calendarDiv);
+    for (let i = startMonth; i <= endMonth; i++) {
+        const days = getMonthDays(i);
+
+        const monthCalendar = document.createElement("div");
+        monthCalendar.classList.add("calendar-block");
+
+        const monthName = document.createElement("div");
+        monthName.classList.add("month-name");
+        monthName.textContent = monthNumberToName(i);
+        monthCalendar.appendChild(monthName);
+
+        days.forEach(d => {
+            const label = document.createElement("label");
+            label.classList.add("calendar-day");
+            if ((d.ts >= Math.min(now.getTime(), date.getTime()) && d.ts <= Math.max(now.getTime(), date.getTime()))
+                || (isSameDay(d.ts, date, now))) {
+                label.classList.add("calendar-day-highlighted");
+            }
+            const weekday = document.createElement("div");
+            weekday.classList.add("weekday-div");
+            weekday.textContent = d.weekday;
+            label.appendChild(weekday);
+
+            const spanDay = document.createElement("span");
+            spanDay.textContent = d.day;
+            label.appendChild(spanDay);
+            monthCalendar.appendChild(label);
+        });
+
+        calendarDiv.appendChild(monthCalendar);
+    }
+}
+
+function isSameDay(ts, first, second) {
+    const dayDivider = 86400000;
+    return (Math.round(ts / dayDivider) == Math.round(first.getTime() / dayDivider)) ||
+        (Math.round(ts / dayDivider) == Math.round(second.getTime() / dayDivider))
+}
+
+function monthNumberToName(num) {
+    const padded = pad(num + 1, 2);
+
+    let name;
+    Object.keys(months).forEach(k => {
+        if (name == null && months[k] === padded) {
+            name = k;
+        }
+    });
+
+    return name;
+}
+
+function getMonthDays(number) {
+    const monthStr = pad(number + 1, 2);
+    const year = new Date().getFullYear();
+    const startOfMonth = moment(`${year}-${monthStr}-01`);
+    const dayCount = startOfMonth.daysInMonth();
+
+    const days = [];
+    for (let i = 0; i < dayCount; i++) {
+        const day = pad(i + 1, 2);
+        const momentStr = (`${year}-${monthStr}-${day}`);
+        const resolvedDate = moment(momentStr);
+        days.push({
+            day: i + 1,
+            weekday: weekdays[resolvedDate.weekday()],
+            ts: resolvedDate.toDate().getTime()
+        });
+    }
+
+    return days;
 }
 
 function inputPasted() {
