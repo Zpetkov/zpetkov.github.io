@@ -59,6 +59,51 @@ body {
     height: 100%;
 }
 
-.disabled {
+.inactive {
     opacity: 39%;
+}
+
+.view-format-div {
+    margin-top: 11px;
+    max-width: 50%;
+    min-width: 33%;
+    justify-content: left;
+    text-align: left;
+}
+
+.view-format-label {
+    background-color: rgb(66, 66, 238);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+    user-select: none;
+}
+
+.view-format-inactive {
+    opacity: 19%;
+}
+
+.view-format-span {
+    color: white;
+    font-weight: 550;
+}
+
+.jwt-key {
+    max-width: 40%;
+    min-width: 10%;
+    margin-right: 5px;
+    line-height: 22px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+
+.jwt-table>tr:nth-child(even) {
+    background: #CCC
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0.4px 4.5px;
 }

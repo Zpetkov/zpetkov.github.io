@@ -21,8 +21,16 @@
             <div id="input-div">
                 <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPressed()"></textarea>
             </div>
-            <div id="output" class="disabled">
+            <div id="output" class="inactive">
                 <pre id="output-pre"></pre>
+            </div>
+            <div class="view-format-div">
+                <label class="view-format-label" id="jsonFormat">
+                    <span onclick="viewFormat('jsonFormat')" class="view-format-span">JSON</span>
+                </label>
+                <label class="view-format-label view-format-inactive" id="keyValueFormat">
+                    <span onclick="viewFormat('keyValueFormat')" class="view-format-span">Key Value</span>
+                </label>
             </div>
         </div>
     </div>
