@@ -101,6 +101,7 @@
     height: 44px;
     width: 44px;
     text-align: center;
+    user-select: none;
 }
 
 .calendar-day-highlighted {
@@ -117,6 +118,7 @@
     font-weight: 650;
     margin-bottom: 4px;
     margin-top: 2px;
+    user-select: none;
 }
 
 .hint {

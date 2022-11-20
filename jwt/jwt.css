@@ -89,6 +89,10 @@ body {
     font-weight: 550;
 }
 
+.view-format-desc {
+    margin-right: 8px;
+}
+
 .jwt-key {
     max-width: 40%;
     min-width: 10%;
