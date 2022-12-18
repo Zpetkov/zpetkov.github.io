@@ -20,9 +20,43 @@
         <div class="input-container">
             <input type="text" id="date-input" onkeyup="inputPressed()" onpaste="inputPasted()">
         </div>
-        <div id="output-div">
-            <div id="output"></div>
+        <div id="output-div"></div>
+        <div id="tools-div">
+            <div class="tool-item">
+                <label>Convert <input type="checkbox" id="select-checkbox" onclick="convertDate()"> </label>
+            </div>
+            <div class="tool-item">
+                <label>Timezone
+                    <form class="tool-item-form">
+                        <select id="select-timezone">
+                            <option value="EEST">EEST</option>
+                            <option value="EET">EET</option>
+                            <option value="CEST">CEST</option>
+                            <option value="CET">CET</option>
+                            <option value="PDT">PDT</option>
+                            <option value="PST">PST</option>
+                            <option value="UT">UT</option>
+                            <option value="MST">MST</option>
+                            <option value="ACDT">ACDT</option>
+                            <option value="ACST">ACST</option>
+                            <option value="GMT">GMT</option>
+                            <option value="CAT">CAT</option>
+                            <option value="EAT">EAT</option>
+                            <option value="WAT">WAT</option>
+                            <option value="EDT">EDT</option>
+                            <option value="EST">EST</option>
+                            <option value="CDT">CDT</option>
+                            <option value="CST">CST</option>
+                            <option value="MDT">MDT</option>
+                        </select>
+                    </form>
+                </label>
+            </div>
+            <div class="tool-item">
+                <label>Format <input type="text" id="select-format" value="DD MMM YYYY hh:mm A"> </label>
+            </div>
         </div>
+        <div id="converted-date-div" class="invisible"><label id="converted-date-label"></label></div>
         <div id="calendar-container">
             <div id="calendar-div"></div>
         </div>

@@ -364,11 +364,13 @@ function inputPressed() {
     const outputDiv = document.getElementById("output-div");
     const outputCalendar = document.getElementById("calendar-div");
     let parsedResults = null;
+    let dateTs = null;
     if (input && input.length) {
         parsedResults = parseTextDate(input);
     } else {
         empty(outputCalendar);
         empty(outputDiv);
+        convertDate();
         return;
     }
     let shouldDrawCalendar = false;
@@ -385,6 +387,7 @@ function inputPressed() {
 
             const timeNow = now().getTime();
             const time = result.date.getTime();
+            dateTs = time;
             let relative = null;
             let relativeText = null;
             if (timeNow >= time) {
@@ -428,6 +431,9 @@ function inputPressed() {
         }
 
         const output = createOutput(outputRows, hints);
+        if (dateTs) {
+            output.setAttribute("date-ts", dateTs);
+        }
         empty(outputCalendar);
         empty(outputDiv);
         outputDiv.appendChild(output);
@@ -436,6 +442,8 @@ function inputPressed() {
             shouldDrawCalendar();
         }
     }
+
+    convertDate();
 }
 
 function calendarDrawable(date) {
@@ -502,6 +510,30 @@ function monthNumberToName(num) {
     return name;
 }
 
+function convertDate() {
+    const enabled = document.getElementById("select-checkbox").checked;
+    const label = document.getElementById("converted-date-label");
+    const labelDiv = document.getElementById("converted-date-div");
+    const parsed = document.getElementsByClassName("output-block").length;
+    const dateTs = parsed ? document.getElementsByClassName("output-block")[0].getAttribute("date-ts") : null;
+ 
+    if (enabled && dateTs) {
+        labelDiv.classList.remove("invisible");
+    } else {
+        labelDiv.classList.add("invisible");
+        label.innerText = "";
+        return;
+    }
+
+    const timezone = document.getElementById("select-timezone").value;
+    const format = document.getElementById("select-format").value;
+
+    if (dateTs) {
+        const formatted = moment(Number(dateTs)).utcOffset(timeZones[timezone]).format(format);
+        label.innerText = formatted;
+    }
+}
+
 function getMonthDays(number) {
     const monthStr = pad(number + 1, 2);
     const year = new Date().getFullYear();
@@ -528,5 +560,7 @@ function inputPasted() {
 }
 
 window.onload = () => {
+    document.getElementById("select-timezone").addEventListener("input", convertDate);
+
     document.getElementById("date-input").select();
 };
