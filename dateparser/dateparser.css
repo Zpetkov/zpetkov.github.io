@@ -229,3 +229,14 @@
         margin-bottom: 5px;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    #tools-div {
+        width: 90%;
+        text-align: center;
+    }
+
+    .tool-item {
+        text-align: center;
+    }
+}
