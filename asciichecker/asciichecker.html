@@ -16,11 +16,11 @@
         <a href="/index.html" class="header-link">Home</a>
     </div>
     <div id="main-container">
-        <div class="editor-description">ASCII Character codes checker</div>
+        <div class="editor-description basic-text">ASCII Character codes checker</div>
         <div class="input-container">
             <div>
-                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
-                <div id="chunked">Text is too large and has been split in chunks of 10000.
+                <textarea id="input-area" class="basic-textarea" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
+                <div id="chunked" class="basic-text">Text is too large and has been split in chunks of 10000.
                     <div>
                         <div class="chunks-indicator">
                             <label class="arrow-left" onclick="renderPreviousChunk()"></label>

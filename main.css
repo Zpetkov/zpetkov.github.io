@@ -52,35 +52,35 @@ a:hover {
 }
 
 .colored-bg {
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(30, 30, 35);
 }
 
 .index-page-header {
-    height: 65px;
-    background-color: black;
+    height: 55px;
+    background-color: rgb(5, 5, 8);
     text-align: center;
 }
 
 .index-page-header-text {
-    color: #006d80;
+    color: rgba(39, 223, 33, 0.424);
     font-family: Impact;
-    font-size: 57px;
+    font-size: 46px;
     user-select: none;
     opacity: 0.75;
     font-style: italic;
 }
 
 .page-header {
-    padding: 30px 0;
-    height: 65px;
-    background-color: black;
+    padding: 15px 0;
+    height: 55px;
+    background-color: rgb(5, 5, 8);
     text-align: center;
 }
 
 .page-header-text {
-    color: #006d80;
+    color: rgba(39, 223, 33, 0.424);
     font-family: Impact;
-    font-size: 65px;
+    font-size: 46px;
     user-select: none;
     opacity: 0.75;
     font-style: italic;
@@ -94,28 +94,26 @@ a:hover {
 }
 
 .navigation {
-    margin-top: 65px;
+    margin-top: 55px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
 }
 
 .navigation>div:hover {
-    background-color: #d4e0ff;
+    background-color: rgb(95, 95, 97);
 }
 
 .navigation-link {
-    max-width: 400px;
-    border: 2px solid #d3d3d5;
-    border-left-width: 1.25px;
-    border-right-width: 1.25px;
-    background-color: white;
-    margin-bottom: 2.5px;
+    max-width: 300px;
+    background-color: rgb(55, 55, 57);
+    margin-bottom: 5.5px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 5px;
+    border-radius: 11px;
     cursor: pointer;
     font-size: 22px;
+    color: rgb(236, 236, 240)
 }
 
 .index-description {
@@ -123,6 +121,15 @@ a:hover {
     text-align: center;
     font-size: 24px;
     margin-bottom: 15px;
+}
+
+.basic-text {
+    color: rgb(236, 236, 240);
+}
+
+.basic-textarea {
+    color: rgb(236, 236, 240);
+    background-color: rgb(55, 55, 57);
 }
 
 .footer {

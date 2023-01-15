@@ -16,16 +16,16 @@
         <a href="/index.html" class="header-link">Home</a>
     </div>
     <div id="main-container">
-        <div class="editor-description">JWT Decoder</div>
+        <div class="editor-description basic-text">JWT Decoder</div>
         <div class="editor-container">
             <div id="input-div">
-                <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPressed()"></textarea>
+                <textarea class="basic-textarea" id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPressed()"></textarea>
             </div>
-            <div id="output" class="inactive">
+            <div id="output" class="inactive basic-textarea">
                 <pre id="output-pre"></pre>
             </div>
             <div class="view-format-div">
-                <label class="view-format-desc">Display output as:</label>
+                <label class="view-format-desc basic-text">Display output as:</label>
                 <label class="view-format-label" id="jsonFormat">
                     <span onclick="viewFormat('jsonFormat')" class="view-format-span">JSON</span>
                 </label>

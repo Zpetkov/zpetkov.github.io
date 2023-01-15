@@ -39,7 +39,6 @@
     min-height: 175px;
     width: 95%;
     max-width: 750px;
-    background-color: white;
     display: block;
     border: solid 1px gray;
 }
@@ -90,20 +89,20 @@
 }
 
 .highlighted-span-begin {
-    border-left: solid 3px black;
-    border-bottom: solid 3px black;
-    border-top: solid 3px black;
+    border-left: solid 3px rgb(255, 255, 255);
+    border-bottom: solid 3px rgb(255, 255, 255);
+    border-top: solid 3px rgb(255, 255, 255);
 }
 
 .highlighted-span {
-    border-bottom: solid 3px black;
-    border-top: solid 3px black;
+    border-bottom: solid 3px rgb(255, 255, 255);
+    border-top: solid 3px rgb(255, 255, 255);
 }
 
 .highlighted-span-end {
-    border-bottom: solid 3px black;
-    border-top: solid 3px black;
-    border-right: solid 3px black;
+    border-bottom: solid 3px rgb(255, 255, 255);
+    border-top: solid 3px rgb(255, 255, 255);
+    border-right: solid 3px rgb(255, 255, 255);
 }
 
 #chunked {
@@ -136,8 +135,6 @@
     min-width: 15px;
     line-height: 30px;
     height: 30px;
-    background-color: white;
-    border: solid 1px black;
     font-size: 16px;
     user-select: none;
     margin-left: 6px;

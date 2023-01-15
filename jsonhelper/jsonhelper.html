@@ -16,15 +16,18 @@
         <a href="/index.html" class="header-link">Home</a>
     </div>
     <div id="main-container">
-        <div class="editor-description">JSON object generator from text for Java</div>
+        <div class="editor-description basic-text">JSON object generator from text for Java</div>
         <div class="editor-container">
-            <textarea id="input-area" tabIndex="-1" onkeyup="inputPressed()" onpaste="inputPasted()"></textarea>
+            <div id="input-div">
+                <textarea id="input-area" class="basic-textarea" tabIndex="-1" onkeyup="inputPressed()"
+                    onpaste="inputPasted()"></textarea>
+            </div>
             <div id="output"></div>
         </div>
         <div>
-            <input type="button" class="copy-button" value="Copy to clipboard" onclick="copyToClipboard()">
+            <input type="button" class="copy-button basic-textarea" value="Copy to clipboard" onclick="copyToClipboard()">
         </div>
-        <div class="usage-container">
+        <div class="usage-container basic-text">
             <h2>Information:</h2>
             <div class="usage-line">
                 <pre>The last token of each line is taken as a <span class="span-hl">JSON</span> property name.</pre>
