@@ -104,7 +104,7 @@ const shortTimeZones = {
 
 const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-const tokenRegex = new RegExp("([a-zA-Z0-9:\\.]+)", 'g');
+const tokenRegex = new RegExp("([a-zA-Z0-9:\\.+-]+)", 'g');
 const meridians = { am: 'am', pm: 'pm' };
 meridians["p.m."] = 'pm';
 meridians["a.m."] = 'am';
@@ -165,7 +165,7 @@ function guessParse(input) {
         typeCandidates[i] = [];
     }
 
-    const extracted = [];
+    let extracted = [];
 
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
@@ -191,6 +191,8 @@ function guessParse(input) {
             typeCandidates[i].push("meridian");
         } else if (timeZones[token.toUpperCase()]) {
             typeCandidates[i].push("timezone");
+        } else if (new RegExp("^[+-]{1}[\\d]{4}$").test(token)) {
+            typeCandidates[i].push("offset");
         } else if (shortTimeZones[token.toUpperCase()]) {
             typeCandidates[i].push("shortTimezone");
         } else if (token.length >= 4 && hourMinuteRegex.test(token)) {
@@ -211,6 +213,7 @@ function guessParse(input) {
     let timezoneCandidate = null;
     let shortTimezone = null;
     let epochDate = null;
+    let offset = null;
     for (let i = 0; i < tokens.length; i++) {
         const candidates = typeCandidates[i];
         if (candidates.indexOf("month") > -1) {
@@ -237,13 +240,15 @@ function guessParse(input) {
             extracted.push({ name: "day", value: tokens[i] });
         } else if (candidates.indexOf("timezone") > -1) {
             if (extractedHour || hourCandidate && !timezoneCandidate) {
-                timezoneCandidate = timeZones[tokens[i].toUpperCase()];
+                timezoneCandidate = timeZones[tokens[i].toUpperCase()] || timezoneCandidate;
                 extracted.push({ name: "timezone", value: tokens[i] });
             }
         } else if (candidates.indexOf("shortTimezone") > -1) {
             shortTimezone = shortTimeZones[tokens[i].toUpperCase()];
         } else if (epochDate == null && candidates.indexOf("epochTimestamp") > -1) {
             epochDate = new Date(Number(tokens[i]));
+        } else if (candidates.indexOf("offset") > -1) {
+            offset = tokens[i];
         }
     }
 
@@ -279,7 +284,17 @@ function guessParse(input) {
     hours = extractedHour ? formatExtractedTime(extractedHour) : "00:00:00.000";
     let format = "DD-MM-YYYY hh:mm:ss:sss a";
 
-    if (shortTimezone) {
+    if (offset) {
+        timezoneCandidate = offset;
+
+        const tzIndex = extracted.findIndex((t) => { return t.name === "timezone"; });
+        if (tzIndex > -1) {
+            extracted = extracted.splice(tzIndex, 1);
+        }
+
+        extracted.push({ name: "offset", value: offset });
+
+    } else if (shortTimezone) {
         const isDst = moment(day + "-" + month + "-" + year + " " + hours + " " + meridian, format).isDST();
         const resolvedTimezone = isDst ? shortTimezone.dst : shortTimezone.nonDst;
         if (!timezoneCandidate) {
@@ -516,7 +531,7 @@ function convertDate() {
     const labelDiv = document.getElementById("converted-date-div");
     const parsed = document.getElementsByClassName("output-block").length;
     const dateTs = parsed ? document.getElementsByClassName("output-block")[0].getAttribute("date-ts") : null;
- 
+
     if (enabled && dateTs) {
         labelDiv.classList.remove("invisible");
     } else {
