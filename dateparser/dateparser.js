@@ -148,7 +148,7 @@ function pad(num, digits) {
 }
 
 function formatExtractedTime(extracted) {
-    return pad(extracted.hour, 2) + ":" + pad(extracted.minute, 2) + ":" + pad(extracted.second, 2) + ":" + pad(extracted.millisecond, 3);
+    return pad(extracted.hour, 2) + ":" + pad(extracted.minute, 2) + ":" + pad(extracted.second, 2);
 }
 
 function guessParse(input) {
@@ -281,8 +281,8 @@ function guessParse(input) {
     if (!extractedHour) {
         meridian = "";
     }
-    hours = extractedHour ? formatExtractedTime(extractedHour) : "00:00:00.000";
-    let format = "DD-MM-YYYY hh:mm:ss:sss a";
+    hours = extractedHour ? formatExtractedTime(extractedHour) : "00:00:00";
+    let format = "DD-MM-YYYY hh:mm:ss a";
 
     if (offset) {
         timezoneCandidate = offset;
