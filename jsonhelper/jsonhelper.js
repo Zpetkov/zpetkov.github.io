@@ -8,8 +8,10 @@ const javaTypes = {
     integer: 100,
     short: 100,
     bigdecimal: 1000000,
+    biginteger: 1000000,
     double: 100.30,
     float: 100.30,
+    number: 100,
     date: new Date(),
     timestamp: new Date(),
     offsetdatetime: new Date(),
@@ -100,7 +102,17 @@ function copyToClipboard() {
 }
 
 function inputPasted() {
-    setTimeout(inputPressed, 100);
+    inputPressedDelayed();
+}
+
+const inputDelayMs = 250;
+var inputPressedTimeout = null;
+function inputPressedDelayed() {
+    if (inputPressedTimeout) {
+        clearTimeout(inputPressedTimeout);
+    }
+
+    inputPressedTimeout = setTimeout(inputPressed, inputDelayMs);
 }
 
 window.onload = () => { document.getElementById("input-area").select() };

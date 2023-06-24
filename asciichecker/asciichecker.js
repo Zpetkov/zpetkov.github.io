@@ -187,7 +187,17 @@ function renderPreviousChunk() {
 }
 
 function inputPasted() {
-    setTimeout(inputPressed, 100);
+    inputPressedDelayed();
+}
+
+const inputDelayMs = 250;
+var inputPressedTimeout = null;
+function inputPressedDelayed() {
+    if (inputPressedTimeout) {
+        clearTimeout(inputPressedTimeout);
+    }
+
+    inputPressedTimeout = setTimeout(inputPressed, inputDelayMs);
 }
 
 window.onload = () => { document.getElementById("input-area").select() };
