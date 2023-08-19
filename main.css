@@ -135,3 +135,13 @@ a:hover {
 .footer {
     text-align: center;
 }
+
+.vmid {
+    vertical-align: middle;
+}
+
+.footer-icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 1px;
+}
