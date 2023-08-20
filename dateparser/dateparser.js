@@ -471,33 +471,37 @@ function drawCalendar(ts) {
     const startMonth = Math.min(date.getMonth(), now.getMonth());
     const endMonth = Math.max(date.getMonth(), now.getMonth());
 
+    const startDate = Math.min(now.getTime(), date.getTime());
+    const endDate = Math.max(now.getTime(), date.getTime());
+
     const calendarDiv = document.getElementById("calendar-div");
     empty(calendarDiv);
-    for (let i = startMonth; i <= endMonth; i++) {
-        const days = getMonthDays(i);
+    for (let monthIndex = startMonth; monthIndex <= endMonth; monthIndex++) {
+        const days = getMonthDays(monthIndex);
 
         const monthCalendar = document.createElement("div");
         monthCalendar.classList.add("calendar-block");
 
         const monthName = document.createElement("div");
         monthName.classList.add("month-name");
-        monthName.textContent = monthNumberToName(i);
+        monthName.textContent = monthNumberToName(monthIndex);
         monthCalendar.appendChild(monthName);
 
-        days.forEach(d => {
+
+        days.forEach(selectedDay => {
             const label = document.createElement("label");
             label.classList.add("calendar-day");
-            if ((d.ts >= Math.min(now.getTime(), date.getTime()) && d.ts <= Math.max(now.getTime(), date.getTime()))
-                || (isSameDay(d.ts, date, now))) {
+            if ((selectedDay.ts.getTime() >= startDate && selectedDay.ts.getTime() <= endDate)
+                || (isSameDay(selectedDay.ts, date) || isSameDay(selectedDay.ts, now))) {
                 label.classList.add("calendar-day-highlighted");
             }
             const weekday = document.createElement("div");
             weekday.classList.add("weekday-div");
-            weekday.textContent = d.weekday;
+            weekday.textContent = selectedDay.weekday;
             label.appendChild(weekday);
 
             const spanDay = document.createElement("span");
-            spanDay.textContent = d.day;
+            spanDay.textContent = selectedDay.day;
             label.appendChild(spanDay);
             monthCalendar.appendChild(label);
         });
@@ -506,10 +510,10 @@ function drawCalendar(ts) {
     }
 }
 
-function isSameDay(ts, first, second) {
-    const dayDivider = 86400000;
-    return (Math.round(ts / dayDivider) == Math.round(first.getTime() / dayDivider)) ||
-        (Math.round(ts / dayDivider) == Math.round(second.getTime() / dayDivider))
+function isSameDay(ts, otherDate) {
+    return ts.getDate() === otherDate.getDate() &&
+        ts.getFullYear() === otherDate.getFullYear() &&
+        ts.getMonth() === otherDate.getMonth();
 }
 
 function monthNumberToName(num) {
@@ -559,11 +563,11 @@ function getMonthDays(number) {
     for (let i = 0; i < dayCount; i++) {
         const day = pad(i + 1, 2);
         const momentStr = (`${year}-${monthStr}-${day}`);
-        const resolvedDate = moment(momentStr);
+        const resolvedDate = moment(momentStr, 'YYYY-MM-DD');
         days.push({
             day: i + 1,
             weekday: weekdays[resolvedDate.weekday()],
-            ts: resolvedDate.toDate().getTime()
+            ts: resolvedDate.toDate()
         });
     }
 
