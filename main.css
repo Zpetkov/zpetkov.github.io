@@ -91,6 +91,7 @@ a:hover {
     font-style: normal;
     font-weight: normal;
     line-height: 25px;
+    user-select: none;
 }
 
 .navigation {

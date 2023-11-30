@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="jsformat.css">
+    <title>JSON Formatter</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <a href="/index.html" class="header-link">Home</a>
+    </div>
+    <div id="main-container">
+        <div class="editor-description basic-text">JSON Formatter</div>
+        <div class="input-container">
+            <div class="options">
+                <label>Spaces count</label>
+                <select id="select-spaces">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+            <div>
+                <textarea id="input-area" class="basic-textarea" tabIndex="-1" onkeyup="inputPressedDelayed()" onpaste="inputPasted()"></textarea>
+            </div>
+        </div>
+        <div id="output-area">
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="jsformat.js"></script>
+</body>
+
+</html>

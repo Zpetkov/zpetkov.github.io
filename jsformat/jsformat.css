@@ -1,0 +1,57 @@
+.editor-description {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 25px;
+    margin-bottom: 45px;
+    user-select: none;
+}
+
+#main-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.input-container {
+    margin: 0 auto;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#input-area {
+    display: block;
+    height: 220px;
+    width: 95%;
+    max-width: 750px;
+    font-size: 18px;
+    border: solid 1px gray;
+    margin-left: auto;
+    margin-right: auto;
+    resize: none;
+}
+
+#output-area {
+    margin: 0 auto;
+    font-size: 18px;
+    min-height: 175px;
+    width: 95%;
+    max-width: 750px;
+    display: block;
+    border: solid 1px gray;
+    user-select: text;
+}
+
+.output-pre {
+    max-width: 100%;
+    word-wrap: break-word;
+    text-wrap: wrap;
+    margin: 0;
+}
+
+.options {
+    text-align: center;
+    user-select: none;
+}
+
+#select-spaces {
+    margin-bottom: 10px;
+}
