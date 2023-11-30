@@ -19,7 +19,7 @@
         <div class="editor-description basic-text">JSON Formatter</div>
         <div class="input-container">
             <div class="options">
-                <label>Spaces count</label>
+                <label class="basic-text">Spaces count</label>
                 <select id="select-spaces">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -33,9 +33,7 @@
                 <textarea id="input-area" class="basic-textarea" tabIndex="-1" onkeyup="inputPressedDelayed()" onpaste="inputPasted()"></textarea>
             </div>
         </div>
-        <div id="output-area">
-            <div id="output"></div>
-        </div>
+        <div id="output-area" class="basic-text"></div>
     </div>
 
     <script type="text/javascript" src="jsformat.js"></script>
