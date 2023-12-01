@@ -71,7 +71,7 @@ body {
 }
 
 .view-format-label {
-    background-color: rgb(66, 66, 238);
+    border: 2px solid white;
     border-radius: 6px;
     cursor: pointer;
     padding: 5px;
@@ -80,7 +80,7 @@ body {
 }
 
 .view-format-inactive {
-    opacity: 19%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .view-format-span {
