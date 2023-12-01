@@ -202,13 +202,12 @@
 .hint-pointer {
     background-image: url('hint-pointer.png');
     background-repeat: no-repeat;
-    width: 30px;
-    height: 20px;
+    width: 39px;
+    height: 24px;
     display: inline-block;
-    background-size: 90% 90%;
     vertical-align: middle;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 @media only screen and (max-width: 768px) {
