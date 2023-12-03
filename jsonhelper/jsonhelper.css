@@ -51,15 +51,18 @@
 .output-pre {
     margin-left: 15px;
     text-wrap: wrap;
+    word-wrap: break-word;
 }
 
 .usage-container {
+    max-width: 90%;
     margin-top: 55px;
     margin-left: 5%;
 }
 
 .usage-line>pre {
     text-wrap: wrap;
+    word-wrap: break-word;
 }
 
 .span-hl {
