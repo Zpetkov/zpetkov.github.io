@@ -50,11 +50,16 @@
 
 .output-pre {
     margin-left: 15px;
+    text-wrap: wrap;
 }
 
 .usage-container {
     margin-top: 55px;
     margin-left: 5%;
+}
+
+.usage-line>pre {
+    text-wrap: wrap;
 }
 
 .span-hl {

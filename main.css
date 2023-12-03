@@ -99,14 +99,19 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+    text-align: center;
 }
 
-.navigation>div:hover {
+.navigation>div>div:hover {
     background-color: rgb(95, 95, 97);
 }
 
+.navigation-row {
+    text-align: left;
+}
+
 .navigation-link {
-    max-width: 300px;
+    max-width: 255px;
     background-color: rgb(55, 55, 57);
     margin-bottom: 5.5px;
     margin-left: auto;
@@ -114,7 +119,8 @@ a:hover {
     border-radius: 11px;
     cursor: pointer;
     font-size: 22px;
-    color: rgb(236, 236, 240)
+    color: rgb(236, 236, 240);
+    padding-left: 25px;
 }
 
 .index-description {
@@ -145,4 +151,10 @@ a:hover {
     width: 15px;
     height: 15px;
     margin-left: 1px;
+}
+
+@media only screen and (max-width: 768px) {
+     .navigation {
+        width: 75%;
+     }
 }
