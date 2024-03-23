@@ -48,7 +48,7 @@
 }
 
 .ascii-span {
-    width: 26px;
+    min-width: 26px;
     height: 35px;
     line-height: 35px;
     font-size: 21px;
@@ -60,7 +60,7 @@
 }
 
 .non-ascii-span {
-    width: 26px;
+    min-width: 26px;
     height: 35px;
     line-height: 35px;
     font-size: 21px;
@@ -145,6 +145,26 @@
     margin-top: 5px;
     display: flex;
     justify-content: center;
+}
+
+.show-codes-div {
+    text-align: center;
+    display: block;
+    margin-top: 12px;
+}
+
+#show-codes-button {
+    border: solid 2px gray;
+    padding: 3px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.code-span {
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 @media only screen and (max-width: 1250px) {

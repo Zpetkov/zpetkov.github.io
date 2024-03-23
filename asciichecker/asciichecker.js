@@ -19,18 +19,20 @@ function spanId(index) {
     return "s_" + index;
 }
 
-function createSpan(char, index) {
-    const ascii = isAscii(char);
+function createSpan(char, title, ascii, mode, index) {
     const spanClass = ascii ? "ascii-span" : "non-ascii-span";
 
     const span = document.createElement("span");
     span.ascii = ascii;
     span.classList.add(spanClass);
+    if (!mode) {
+        span.classList.add('code-span');
+    }
     span.id = spanId(index);
     span.setAttribute("data-index", index);
     if (char.indexOf("\n") == -1 && char.indexOf(" ") == -1) {
         span.textContent = char;
-        span.title = char.charCodeAt(0) + " [" + char + "]";
+        span.title = title;
 
     } else {
         const innerSpan = document.createElement("span");
@@ -142,11 +144,15 @@ function renderText(text) {
 
     const outputElement = document.createElement("div");
     outputElement.id = "output";
+    const mode = Number(document.getElementById('show-codes-button').getAttribute('data-mode'));
 
     let showNextOccurrence = false;
 
     for (let i = 0; i < text.length; i++) {
-        const span = createSpan(text.charAt(i), i);
+        const character = mode ? text.charAt(i) : String(text.charCodeAt(i));
+        const ascii = isAscii(text.charAt(i));
+        const title = (mode ? character.charCodeAt(0) : "") + " [" + text.charAt(i) + "]";
+        const span = createSpan(character, title, ascii, mode, i);
         showNextOccurrence = showNextOccurrence || !span.ascii;
         outputElement.appendChild(span);
     }
@@ -172,7 +178,6 @@ function renderChunk(index) {
         document.getElementById("output").setAttribute("data-chunk", chunk.getAttribute("data-index"));
         const chunkCount = document.getElementById("chunk-count");
         chunkCount.innerHTML = "<span>&nbsp;</span>" + (index + 1) + " / " + chunkCount.getAttribute("data-chunks") + "<span>&nbsp;</span>";
-
     }
 }
 
@@ -198,6 +203,15 @@ function inputPressedDelayed() {
     }
 
     inputPressedTimeout = setTimeout(inputPressed, inputDelayMs);
+}
+
+function showCodes() {
+    const button = document.getElementById('show-codes-button');
+    const mode = Number(document.getElementById('show-codes-button').getAttribute('data-mode'));
+    button.setAttribute('data-mode', Number(!mode));
+    button.innerText = mode ? 'Show Chars' : 'Show char codes';
+
+    inputPressed();
 }
 
 window.onload = () => { document.getElementById("input-area").select() };
