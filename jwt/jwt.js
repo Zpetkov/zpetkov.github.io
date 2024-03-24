@@ -1,5 +1,3 @@
-var viewFormatStyle = "jsonFormat";
-
 function parseJwt(token) {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, '/');
@@ -21,8 +19,7 @@ function inputPressed() {
         outputPre.parentNode.classList.remove("inactive");
         try {
             const result = parseJwt(text);
-
-            if (viewFormatStyle === "jsonFormat") {
+            if (getActiveViewFormat() === "jsonFormat") {
                 outputPre.innerHTML = "";
                 outputPre.textContent = JSON.stringify(result, null, 3);
             } else {
@@ -32,12 +29,12 @@ function inputPressed() {
                     const jwtEntryRow = document.createElement("tr");
 
                     const keyColumn = document.createElement("td");
-                    keyColumn.textContent = jwtKey; 
+                    keyColumn.textContent = jwtKey;
                     keyColumn.classList.add("jwt-key");
                     jwtEntryRow.appendChild(keyColumn);
 
                     const valueColumn = document.createElement("td");
-                    valueColumn.textContent = jwtValue; 
+                    valueColumn.textContent = jwtValue;
                     valueColumn.classList.add("jwt-key");
 
                     jwtEntryRow.appendChild(valueColumn);
@@ -59,19 +56,23 @@ function inputPressed() {
     }
 }
 
-function viewFormat(id) {
-    const button = document.getElementById(id);
+function setViewFormat(elementId) {
+    const button = document.getElementById(elementId);
     button.classList.remove("view-format-inactive");
-    
-    const labels = document.getElementsByClassName("view-format-label");
-    for (let i = 0; i < labels.length; i++) {
-        if (labels[i].id != id) {
-            labels[i].classList.add("view-format-inactive");
-        }
-    }
-    viewFormatStyle = id;
+    button.setAttribute("data-active", 1)
+
+    Array.from(document.getElementsByClassName("view-format-label"))
+        .filter(e => e.id != elementId)
+        .forEach(otherLabel => {
+            otherLabel.classList.add("view-format-inactive");
+            otherLabel.setAttribute("data-active", 0);
+        });
 
     inputPressed();
+}
+
+function getActiveViewFormat() {
+    return Array.from(document.getElementsByClassName("view-format-label")).filter(v => 1 == v.getAttribute("data-active"))[0].id
 }
 
 const inputDelayMs = 250;

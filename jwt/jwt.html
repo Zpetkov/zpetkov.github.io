@@ -26,11 +26,11 @@
             </div>
             <div class="view-format-div">
                 <label class="view-format-desc basic-text">Display output as:</label>
-                <label class="view-format-label" id="jsonFormat">
-                    <span onclick="viewFormat('jsonFormat')" class="view-format-span">JSON</span>
+                <label class="view-format-label" id="jsonFormat" data-active="1">
+                    <span onclick="setViewFormat('jsonFormat')" class="view-format-span">JSON</span>
                 </label>
-                <label class="view-format-label view-format-inactive" id="keyValueFormat">
-                    <span onclick="viewFormat('keyValueFormat')" class="view-format-span">Key Value</span>
+                <label class="view-format-label view-format-inactive" id="keyValueFormat" data-active="0">
+                    <span onclick="setViewFormat('keyValueFormat')" class="view-format-span">Key Value</span>
                 </label>
             </div>
         </div>
