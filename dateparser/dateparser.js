@@ -239,7 +239,7 @@ function guessParse(input) {
             }
             extracted.push({ name: "day", value: tokens[i] });
         } else if (candidates.indexOf("timezone") > -1) {
-            if (extractedHour || hourCandidate && !timezoneCandidate) {
+            if ((extractedHour || hourCandidate != null) && !timezoneCandidate) {
                 timezoneCandidate = timeZones[tokens[i].toUpperCase()] || timezoneCandidate;
                 extracted.push({ name: "timezone", value: tokens[i] });
             }
