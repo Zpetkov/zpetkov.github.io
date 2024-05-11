@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="nw.css">
+    <title>Network Watch</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <a href="/index.html" class="header-link">Home</a>
+    </div>
+    <div id="main-container">
+        <div class="editor-description basic-text">Network Watch</div>
+        <div class="height-offset"></div>
+        <div class="editor-container">
+            <label class="start" id="start-button" data-click="0"></label>
+            <div id="results-div"></div>
+            <div class="commands-div">
+                <label class="basic-text command" id="advanced-button" data-click="0">Advanced</label>
+                <label class="basic-text command" id="clear-button">Clear</label>
+            </div>
+            <div id="advanced-div" class="invisible basic-text">
+                <div id="advanced-table-div"></div>
+                <div id="advanced-save"><label class="basic-text command">Save</label></div>
+            </div>
+            <div id="selected-div">
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="nw.js"></script>
+</body>
+
+</html>
