@@ -222,7 +222,6 @@
 #progress-bar-holder {
     width: 300px;
     height: 18px;
-    max-height: 18px;
     margin-top: 55px;
     padding: 3px;
 }
@@ -236,6 +235,7 @@
 
 .progress-bar-active {
     border: solid 1px var(--start-button);
+    border-radius: 3px;
 }
 
 @keyframes updateProgress {
