@@ -1,8 +1,8 @@
 
 const props = {
-    interval: 10000,
-    timeout: 5000,
-    eventLimit: 500,
+    interval: 5,
+    timeout: 2,
+    eventLimit: 55,
     url: '1.p',
     method: 'GET'
 };
@@ -38,7 +38,8 @@ const commands = {
             }
         });
 
-        props.interval = Math.max(1000, props.interval);
+        props.interval = Math.max(1, props.interval);
+        props.timeout = Math.max(0.1, props.timeout);
 
         postMessage({ type: 'advanced', props: props, saved: 1 });
     },
@@ -68,8 +69,13 @@ function addResult(code, metadata) {
     postMessage({ type: 'pings', removed: removed, new: [newPing] });
 }
 
+function getIntervalMs() {
+    return props.interval * 1000;
+}
+
 function startSchedule() {
-    fetchTimeoutId = setTimeout(fetchFn, props.interval);
+    fetchTimeoutId = setTimeout(fetchFn, getIntervalMs());
+    postMessage({ type: 'schedule', time: props.interval });
 }
 
 async function fetchFn() {
@@ -79,7 +85,7 @@ async function fetchFn() {
 
     const now = new Date().getTime();
     const inactivityDuration = now - inactivityTrack;
-    if (inactivityDuration > props.interval + (10 * 1000)) {
+    if (inactivityDuration > getIntervalMs() + (10 * 1000)) {
         addResult(4, { duration: inactivityDuration });
     }
     inactivityTrack = now;
@@ -88,7 +94,7 @@ async function fetchFn() {
     const fetchProperties = {
         method: props.method,
         cache: 'no-store',
-        signal: AbortSignal.timeout(props.timeout)
+        signal: AbortSignal.timeout(props.timeout * 1000)
     };
 
     const fetchStart = new Date().getTime();

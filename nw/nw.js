@@ -17,6 +17,8 @@ pingWorker.onmessage = (message => {
         });
     } else if (message.data.type == 'advanced') {
         createAdvancedProperties(message.data);
+    } else if (message.data.type == 'schedule') {
+        renderProgressBar(message);
     }
 });
 
@@ -34,7 +36,7 @@ function setupClick(element, functionActive, functionInactive) {
 }
 
 const advancedDiv = document.getElementById('advanced-div');
-const advancedTableDiv = document.getElementById("advanced-table-div");
+const advancedTableDiv = document.getElementById('advanced-table-div');
 
 setupClick(document.getElementById('advanced-button'),
     (element) => {
@@ -49,17 +51,22 @@ setupClick(document.getElementById('advanced-button'),
     }
 );
 
+const progressBarHolder = document.getElementById('progress-bar-holder');
 
 setupClick(document.getElementById('start-button'),
     (startButton) => {
         startButton.classList.remove('start');
         startButton.classList.add('stop');
         pingWorker.postMessage({ type: 'active', active: 1 });
+
+        progressBarHolder.classList.add('progress-bar-active');
     },
     (startButton) => {
         startButton.classList.add('start');
         startButton.classList.remove('stop');
         pingWorker.postMessage({ type: 'active', active: 0 });
+        progressBarHolder.innerHTML = '';
+        progressBarHolder.classList.remove('progress-bar-active');
     }
 );
 
@@ -69,7 +76,7 @@ clearButton.addEventListener('click', () => {
     document.getElementById('results-div').innerHTML = '';
 });
 
-document.getElementById("advanced-save").addEventListener('click', () => {
+document.getElementById('advanced-save').addEventListener('click', () => {
     const props = {};
     Array.from(document.getElementsByClassName('advanced-value-input'))
         .forEach(input => {
@@ -155,7 +162,7 @@ function showSelected(id) {
 
         if (selectedBox.getAttribute('data-duration') != null) {
             const durationSpan = document.createElement('span');
-            durationSpan.innerText = selectedBox.getAttribute('data-duration') + " ms";
+            durationSpan.innerText = selectedBox.getAttribute('data-duration') + ' ms';
             durationSpan.classList.add('basic-text', 'selected-text');
             const durationDiv = document.createElement('div');
             durationDiv.appendChild(durationSpan);
@@ -182,28 +189,28 @@ function createAdvancedProperties(message) {
     const rows = [];
     for (const [key, value] of Object.entries(message.props)) {
 
-        const keyColumn = document.createElement("td");
+        const keyColumn = document.createElement('td');
         keyColumn.textContent = key;
-        keyColumn.classList.add("advanced-key");
+        keyColumn.classList.add('advanced-key');
 
         const valueInput = document.createElement('input');
         valueInput.classList.add('advanced-value-input', 'basic-text');
         valueInput.value = value;
         valueInput.setAttribute('data-key', key);
 
-        const valueColumn = document.createElement("td");
+        const valueColumn = document.createElement('td');
         valueColumn.appendChild(valueInput);
-        valueColumn.classList.add("advanced-value");
+        valueColumn.classList.add('advanced-value');
 
-        const entryRow = document.createElement("tr");
+        const entryRow = document.createElement('tr');
         entryRow.appendChild(keyColumn);
         entryRow.appendChild(valueColumn);
 
         rows.push(entryRow);
     }
 
-    const table = document.createElement("table");
-    table.classList.add("advanced-table");
+    const table = document.createElement('table');
+    table.classList.add('advanced-table');
     rows.forEach(t => { table.appendChild(t); });
 
     advancedTableDiv.innerHTML = '';
@@ -214,4 +221,14 @@ function createAdvancedProperties(message) {
         saveButton.classList.add('flash');
         setTimeout(() => { saveButton.classList.remove('flash'); }, 1000);
     }
+}
+
+function renderProgressBar(event) {
+    const progressBar = document.createElement('div');
+    progressBar.id = 'progress-bar';
+    progressBar.style.animation = 'updateProgress linear forwards';
+    progressBar.style.animationDuration = (1000 * event.data.time) + "ms";
+
+    progressBarHolder.innerHTML = '';
+    progressBarHolder.appendChild(progressBar);
 }
