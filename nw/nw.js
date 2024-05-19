@@ -38,7 +38,7 @@ function setupClick(element, functionActive, functionInactive) {
 const advancedDiv = document.getElementById('advanced-div');
 const advancedTableDiv = document.getElementById('advanced-table-div');
 
-setupClick(document.getElementById('advanced-button'),
+setupClick(document.getElementById('gear-button'),
     (element) => {
         element.classList.add('command-active');
         advancedDiv.classList.remove('invisible');
@@ -76,7 +76,7 @@ clearButton.addEventListener('click', () => {
     document.getElementById('results-div').innerHTML = '';
 });
 
-document.getElementById('advanced-save').addEventListener('click', () => {
+document.getElementById('save-button').addEventListener('click', () => {
     const props = {};
     Array.from(document.getElementsByClassName('advanced-value-input'))
         .forEach(input => {
@@ -217,7 +217,7 @@ function createAdvancedProperties(message) {
     advancedTableDiv.appendChild(table);
 
     if (message.saved) {
-        const saveButton = document.getElementById('advanced-save').childNodes[0];
+        const saveButton = document.getElementById('save-button');
         saveButton.classList.add('flash');
         setTimeout(() => { saveButton.classList.remove('flash'); }, 1000);
     }

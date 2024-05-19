@@ -65,18 +65,10 @@
     width: 195px;
 }
 
-#advanced-button {
-    margin-right: 20px;
-    float: left;
-}
 
-#advanced-save {
+#advanced-commands-div {
     margin-top: 15px;
     display: inline-block;
-}
-
-#clear-button {
-    float: right;
 }
 
 .invisible {
@@ -92,6 +84,22 @@
     background-image: url('stop.png');
 }
 
+#gear-button {
+    width: 35px;
+    height: 35px;
+    border-right: solid 2px rgb(204, 204, 204);
+    border-top: solid 2px rgb(204, 204, 204);
+    border-bottom: solid 2px rgb(204, 204, 204);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    cursor: pointer;
+    background-image: url('gear.png');
+}
+
+.buttons-div {
+    display: flex;
+}
 
 .commands-div {
     text-align: left;

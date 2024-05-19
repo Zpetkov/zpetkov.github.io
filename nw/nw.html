@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="preload" href="start.png" as="image">
     <link rel="preload" href="stop.png" as="image">
+    <link rel="preload" href="gear.png" as="image">
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="nw.css">
     <title>Network Watch</title>
@@ -21,16 +22,19 @@
         <div class="editor-description basic-text">Network Watch</div>
         <div class="height-offset"></div>
         <div class="editor-container">
-            <label class="start" id="start-button" data-click="0"></label>
+            <div class="buttons-div">
+                <label class="start" id="start-button" data-click="0"></label>
+                <label id="gear-button" data-click="0"></label>
+            </div>
             <div id="progress-bar-holder" class="progress-bar-inactive"></div>
             <div id="results-div"></div>
-            <div class="commands-div">
-                <label class="basic-text command" id="advanced-button" data-click="0">Advanced</label>
-                <label class="basic-text command" id="clear-button">Clear</label>
-            </div>
             <div id="advanced-div" class="invisible basic-text">
                 <div id="advanced-table-div"></div>
-                <div id="advanced-save"><label class="basic-text command">Save</label></div>
+                <div id="advanced-commands-div">
+                    <label class="basic-text command" id="save-button">Save</label>
+                    <label class="basic-text command" id="clear-button">Clear</label>
+                </div>
+                
             </div>
             <div id="selected-div">
                 <div></div>
