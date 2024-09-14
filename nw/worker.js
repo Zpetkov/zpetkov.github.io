@@ -38,7 +38,7 @@ const commands = {
             }
         });
 
-        props.interval = Math.max(1, props.interval);
+        props.interval = Math.max(0.5, props.interval);
         props.timeout = Math.max(0.1, props.timeout);
 
         postMessage({ type: 'advanced', props: props, saved: 1 });

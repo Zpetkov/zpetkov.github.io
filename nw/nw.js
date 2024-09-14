@@ -244,7 +244,7 @@ window.onload = () => {
         progressBarHolder.innerHTML = '';
         progressBarHolder.appendChild(progressBar);
     }
-    
+
     const totalsDiv = document.getElementById('totals-container');
     setupClick(document.getElementById('totals-button'),
         (element) => {
@@ -258,26 +258,37 @@ window.onload = () => {
     );
 
     function renderTotals() {
-        totalsDiv.childNodes[0].innerHTML = '';
+        const tbody = document.getElementById("totals-body");
+        tbody.innerHTML = '';
         Object.keys(totals).filter(e => e !== 'add').sort().forEach(c => {
             const row = document.createElement('tr');
             row.classList.add('totals-div');
-            
+
             const label = document.createElement('td');
             label.classList.add('basic-text', 'total-label');
             label.textContent = `${totals[c]}`;
-            
+
             row.appendChild(label);
 
             const colorBox = document.createElement('div')
             colorBox.classList.add(colors[c], 'ping-result');
-            
+
             const colorColumn = document.createElement('td');
             colorColumn.appendChild(colorBox);
 
             row.appendChild(colorColumn);
 
-            totalsDiv.childNodes[0].appendChild(row);
+            tbody.appendChild(row);
         })
     }
+
+    document.getElementById("short-button").addEventListener('click', () => {
+        const propsShort = {
+            interval: 1,
+            timeout: 0.3,
+            eventLimit: 110,
+        }
+        pingWorker.postMessage({ type: 'update', props: propsShort });
+    });
+
 }

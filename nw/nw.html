@@ -31,15 +31,22 @@
             <div id="advanced-div" class="invisible basic-text">
                 <div id="advanced-table-div"></div>
                 <div id="advanced-commands-div">
-                    <label class="basic-text command" id="save-button">Save</label>
-                    <label class="basic-text command" id="clear-button">Clear</label>
-                    <label class="basic-text command" id="totals-button">Totals</label>
+                    <div>
+                        <label class="basic-text command" id="save-button">Save</label>
+                        <label class="basic-text command" id="clear-button">Clear</label>
+                        <label class="basic-text command" id="totals-button">Totals</label>
+                    </div>
+                    <div id="presets-commands-div">
+                        <label class="basic-text command preset-command" id="short-button">Short disruptions</label>
+                    </div>
                 </div>
             </div>
             <div id="selected-div">
                 <div></div>
             </div>
-            <table id="totals-container" class="invisible"><tbody></tbody></table>
+            <table id="totals-container" class="invisible">
+                <tbody id="totals-body"></tbody>
+            </table>
         </div>
     </div>
 
