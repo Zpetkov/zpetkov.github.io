@@ -174,7 +174,7 @@
     --red: rgb(255, 0, 0);
     --green: rgb(16, 149, 16);
     --yellow: rgb(255, 255, 0);
-    --orange: rgb(255, 69, 0);
+    --darkmagenta: rgb(163, 45, 163);
     --gray: rgb(99, 94, 94);
     --clicked-event: rgb(255, 255, 255);
     --start-button: rgb(204, 204, 204);
@@ -192,8 +192,8 @@
     background-color: var(--yellow);
 }
 
-.orange {
-    background-color: var(--orange);
+.darkmagenta {
+    background-color: var(--darkmagenta);
 }
 
 .gray {

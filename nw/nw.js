@@ -99,7 +99,7 @@ window.onload = () => {
     });
 
     const colors = {
-        0: 'orange',
+        0: 'darkmagenta',
         1: 'red',
         2: 'green',
         3: 'yellow',
@@ -282,13 +282,32 @@ window.onload = () => {
         })
     }
 
+    const propsShortDisruptions = {
+        interval: 1,
+        timeout: 0.3,
+        eventLimit: 110,
+    }
     document.getElementById("short-button").addEventListener('click', () => {
-        const propsShort = {
-            interval: 1,
-            timeout: 0.3,
-            eventLimit: 110,
-        }
-        pingWorker.postMessage({ type: 'update', props: propsShort });
+        pingWorker.postMessage({ type: 'update', props: propsShortDisruptions });
     });
+
+    function processQueryParams() {
+        const queryParams = new URLSearchParams(new URL(window.location.href).search);
+
+        if (queryParams.get('tt') == 1) {
+            totalsDiv.classList.remove('invisible');
+        }
+
+        if (queryParams.get('as') == 1) {
+            document.getElementById('start-button').click();
+        }
+
+        if (queryParams.get('sd') == 1) {
+            pingWorker.postMessage({ type: 'update', props: propsShortDisruptions });
+        }
+    }
+
+
+    processQueryParams();
 
 }
