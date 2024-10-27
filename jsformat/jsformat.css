@@ -47,6 +47,15 @@
     margin: 0;
 }
 
+.show-index {
+    padding-left: 12px;
+    cursor: pointer;
+    color: #2dccb6;
+    user-select: none;
+    text-decoration: underline;
+    display: inline-block;
+}
+
 .options {
     text-align: center;
     user-select: none;
