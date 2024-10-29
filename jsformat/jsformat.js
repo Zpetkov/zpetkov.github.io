@@ -35,7 +35,7 @@ function inputPressed() {
 
 function errorHints(errorMessage) {
     errorMessage = errorMessage || "";
-    const matches = errorMessage.match(".*at line (\\d+) column (\\d+) of the JSON data");
+    const matches = errorMessage.match(".*line (\\d+) column (\\d+).*");
     if (matches && matches[1] != undefined && matches[2] != undefined) {
         return [matches[1], matches[2]];
     }

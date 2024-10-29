@@ -54,6 +54,7 @@
     user-select: none;
     text-decoration: underline;
     display: inline-block;
+    font-weight: bold;
 }
 
 .options {
