@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="regxm.css">
+    <title>Regex Matcher</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <a href="/index.html" class="header-link" tabindex="-1">Home</a>
+    </div>
+    <div id="main-container">
+        <div class="editor-description basic-text">Regex Matcher</div>
+        <div class="height-offset"></div>
+        <div class="input-container">
+            <input type="text" id="reg-input" class="basic-textarea" onkeyup="inputPressedDelayed()"
+                onpaste="inputPasted()" tabindex="1">
+            <textarea id="input-area" class="basic-textarea" onkeyup="inputPressedDelayed()"
+                onpaste="inputPasted()" tabindex="2"></textarea>
+            <div id="output-area">
+                <div class="output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="regxm.js"></script>
+</body>
+
+</html>
