@@ -80,6 +80,8 @@
     padding-left: 6px;
     display: block;
     width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .output-entry-subgroup {
@@ -94,6 +96,39 @@
 .reg-error {
     color: rgb(230, 35, 20);
     font-weight: bold;
+}
+
+.groups-table>tbody>tr:nth-child(1) {
+    background-color: rgb(47, 47, 47);
+    user-select: none;
+}
+
+.groups-table>tbody>tr>td:nth-child(1) {
+    max-width: 30%;
+    min-width: 13%;
+    line-height: 20px;
+    border: 1px solid gray;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-wrap: wrap;
+}
+
+.groups-table>tbody>tr>td:nth-child(2) {
+    max-width: 70%;
+    min-width: 60%;
+    line-height: 20px;
+    border: 1px solid gray;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-wrap: wrap;
+}
+
+.groups-table {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 768px) {

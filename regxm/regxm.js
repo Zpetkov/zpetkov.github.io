@@ -73,22 +73,42 @@ function createOutputEntryElement(data, index) {
 
     const textDiv = document.createElement("div");
 
-    for (let line of lines) {
-        const textSpan = document.createElement("span");
-        textSpan.classList.add("output-text");
-        if (line.group === 0) {
-            textSpan.textContent = line.text;
-        } else {
-            textSpan.textContent = "Group: " + line.group + " " + line.text;
-            textSpan.classList.add("output-entry-subgroup");
-        }
+    const groupsTable = document.createElement("table");
+    groupsTable.classList.add("groups-table");
+    const groupBody = document.createElement("tbody");
+    groupsTable.appendChild(groupBody);
 
-        textDiv.appendChild(textSpan);
+    for (let line of lines) {
+        if (line.group === 0) {
+            const textElement = document.createElement("span");
+            textElement.classList.add("output-text");
+            textElement.textContent = line.text;
+            textDiv.appendChild(textElement);
+        } else {
+            if (groupBody.childNodes.length === 0) {
+                groupBody.appendChild(newRow("Group", "Value"));
+            }
+            groupBody.appendChild(newRow(line.group, line.text));
+        }
+    }
+
+    if (groupBody.childNodes.length) {
+        textDiv.appendChild(groupsTable);
     }
 
     outputEntry.appendChild(textDiv);
 
     return outputEntry;
+}
+
+function newRow(first, second) {
+    const row = document.createElement("tr");
+    [first, second].forEach(e => {
+        const column = document.createElement("td");
+        column.textContent = e;
+        row.appendChild(column);
+    });
+    return row;
 }
 
 function inputPasted() {
