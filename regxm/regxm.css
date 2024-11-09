@@ -6,7 +6,6 @@
 }
 
 #main-container {
-    width: 90%;
     height: 100%;
     margin: 0 auto;
 }
@@ -135,7 +134,7 @@
     .height-offset {
         height: 5%;
     }
-    #main-container {
+    .input-container {
         width: 82%;
     }
 }
