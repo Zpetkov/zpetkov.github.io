@@ -20,11 +20,23 @@ function inputPressed() {
     outputArea.appendChild(createOutput(text, regex));
 }
 
-function createOutput(text, regex) {
+function findAllMatches(text, regexString) {
+    const result = [];
+    let find;
+    
+    const regx = new RegExp(regexString, "g");
+    while ((find = regx.exec(text)) !== null) {
+        result.push(find);
+    }
+
+    return result;
+}
+
+function createOutput(text, regexPattern) {
     let allMatches;
     let error;
     try {
-        allMatches = text.matchAll(regex).toArray();
+        allMatches = findAllMatches(text, regexPattern);
     } catch (e) {
         allMatches = [];
         error = e.message;
