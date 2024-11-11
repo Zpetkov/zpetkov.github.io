@@ -23,7 +23,7 @@ function inputPressed() {
 function findAllMatches(text, regexString) {
     const result = [];
     let find;
-    
+
     const regx = new RegExp(regexString, "g");
     while ((find = regx.exec(text)) !== null) {
         result.push(find);
@@ -79,7 +79,10 @@ function createOutputEntryElement(data, index) {
 
     const header = document.createElement("label");
     header.classList.add("output-entry-header");
-    header.textContent = "Match: " + (index + 1) + ", Index: " + data.index;
+    [
+        newSpan("Match:  "), newSpan((index + 1), "number"), newSpan(", Index:  "), newSpan((data.index), "number")
+    ].forEach(s => header.appendChild(s));
+
 
     outputEntry.appendChild(header);
 
@@ -111,6 +114,15 @@ function createOutputEntryElement(data, index) {
     outputEntry.appendChild(textDiv);
 
     return outputEntry;
+}
+
+function newSpan(text, cssClass) {
+    const sp = document.createElement("span");
+    if (cssClass) {
+        sp.classList.add(cssClass);
+    }
+    sp.textContent = text;
+    return sp;
 }
 
 function newRow(first, second) {
