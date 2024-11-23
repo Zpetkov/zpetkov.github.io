@@ -27,6 +27,10 @@ function findAllMatches(text, regexString) {
     const regx = new RegExp(regexString, "g");
     while ((find = regx.exec(text)) !== null) {
         result.push(find);
+
+        if (find[0].length === 0) {
+            regx.lastIndex = find.index + 1;
+        }
     }
 
     return result;
