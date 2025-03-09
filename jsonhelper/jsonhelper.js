@@ -1,7 +1,7 @@
 const javaTypes = {
     boolean: true,
-    string: "string",
-    str: "string",
+    string: (k) => k,
+    str: (k) => k,
     char: "c",
     long: 100000,
     int: 100,
@@ -54,11 +54,11 @@ function inputPressed() {
         line = line.trim();
 
         const tokens = line.split(whitespaces);
-        let first = tokens[tokens.length - 1];
-        let value = determineValue(tokens);
- 
-        if (first.length > 0 && typeof keys[first] === "undefined") {
-            keys[first] = value;
+        const keyName = tokens[tokens.length - 1];
+        const value = determineValue(tokens, keyName);
+
+        if (keyName.length > 0 && typeof keys[keyName] === "undefined") {
+            keys[keyName] = value;
         }
     });
 
@@ -72,11 +72,14 @@ function inputPressed() {
     document.getElementById("output").innerHTML = "<pre class=\"output-pre\">" + jsonStringified + "</pre>";
 }
 
-function determineValue(tokens) {
+function determineValue(tokens, keyName) {
     for (let i = 0; i < tokens.length - 1; i++) {
         const token = tokens[i];
         const value = sampleValues[token.toLowerCase()];
         if (value) {
+            if (typeof (value) === "function") {
+                return value(keyName);
+            }
             return value;
         }
     }
