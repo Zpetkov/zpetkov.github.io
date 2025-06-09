@@ -1,0 +1,55 @@
+.editor-description {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+#main-container {
+    height: 90%;
+}
+
+.height-offset {
+    height: 10%;
+}
+
+.input-container {
+    width: 100%;
+}
+
+#input {
+    display: block;
+    height: 160px;
+    width: 95%;
+    max-width: 500px;
+    font-size: 18px;
+    border: solid 1px gray;
+    margin-left: auto;
+    margin-right: auto;
+    resize: none;
+}
+
+#output {
+    margin-top: 40px;
+    aspect-ratio: 1 / 1;
+    width: 95%;
+    max-width: 250px;
+}
+
+.editor-container {
+    width: 45%;
+    background: transparent;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width: 968px) {
+    .editor-container {
+        width: 80%;
+    }
+}

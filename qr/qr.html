@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="qr.css">
+    <title>QR Generator</title>
+</head>
+
+<body class="colored-bg">
+    <div class="page-header">
+        <a href="/index.html" class="header-link">Home</a>
+    </div>
+    <div id="main-container">
+        <div class="editor-description basic-text">QR Generator</div>
+        <div class="height-offset"></div>
+        <div class="editor-container">
+            <div class="input-container">
+                <textarea id="input" class="basic-textarea" onkeyup="inputPressedDelayed()" onpaste="inputPasted()"></textarea>
+            </div>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="qrcode.min.js"></script>
+    <script type="text/javascript" src="qr.js"></script>
+</body>
+
+</html>
