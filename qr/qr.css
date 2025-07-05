@@ -31,13 +31,15 @@
 
 #output {
     margin-top: 40px;
-    aspect-ratio: 1 / 1;
     width: 95%;
     max-width: 250px;
 }
 
 #output-canvas {
     display: block;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    width: 90%;
 }
 
 .editor-container {
