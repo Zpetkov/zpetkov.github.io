@@ -1,7 +1,8 @@
 function inputPressed() {
-    const output = document.getElementById('output');
-    output.innerHTML = '';
-    
+    const canvas = document.getElementById('output-canvas');
+    const canvasContext = canvas.getContext('2d');
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
     const input = document.getElementById('input').value.trim();
     if (!input) {
         return;
@@ -11,7 +12,15 @@ function inputPressed() {
     qrCode.addData(input);
     qrCode.make();
 
-    output.innerHTML = qrCode.createSvgTag({ scalable: true });
+    const svgTagRawContent = qrCode.createSvgTag({ scalable: true });
+    const objectUrlWrapper = URL.createObjectURL(new Blob([svgTagRawContent], { type: 'image/svg+xml;charset=utf-8' }));
+    
+    const svgImageLoader = new Image();
+    svgImageLoader.onload = function () {
+        canvasContext.drawImage(svgImageLoader, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(objectUrlWrapper);
+    };
+    svgImageLoader.src = objectUrlWrapper;
 }
 
 

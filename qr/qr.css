@@ -36,6 +36,10 @@
     max-width: 250px;
 }
 
+#output-canvas {
+    display: block;
+}
+
 .editor-container {
     width: 45%;
     background: transparent;
