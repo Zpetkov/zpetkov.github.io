@@ -26,7 +26,7 @@ function createSpan(char, title, ascii, mode, index) {
     span.ascii = ascii;
     span.classList.add(spanClass);
     if (!mode) {
-        span.classList.add('code-span');
+        span.classList.add("code-span");
     }
     span.id = spanId(index);
     span.setAttribute("data-index", index);
@@ -144,7 +144,7 @@ function renderText(text) {
 
     const outputElement = document.createElement("div");
     outputElement.id = "output";
-    const mode = Number(document.getElementById('show-codes-button').getAttribute('data-mode'));
+    const mode = Number(document.getElementById("show-codes-button").getAttribute("data-mode"));
 
     let showNextOccurrence = false;
 
@@ -206,10 +206,10 @@ function inputPressedDelayed() {
 }
 
 function showCodes() {
-    const button = document.getElementById('show-codes-button');
-    const mode = Number(document.getElementById('show-codes-button').getAttribute('data-mode'));
-    button.setAttribute('data-mode', Number(!mode));
-    button.innerText = mode ? 'Show Chars' : 'Show char codes';
+    const button = document.getElementById("show-codes-button");
+    const mode = Number(document.getElementById("show-codes-button").getAttribute("data-mode"));
+    button.setAttribute("data-mode", Number(!mode));
+    button.innerText = mode ? "Show Chars" : "Show char codes";
 
     inputPressed();
 }
